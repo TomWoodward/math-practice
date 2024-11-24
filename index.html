@@ -1,0 +1,173 @@
+<html>
+  <head>
+
+    <script>
+      let correct;
+
+      function funThing() {
+        const container = document.createElement('div');
+        const numBits = 100;
+        document.body.appendChild(container);
+          
+        container.style.position = 'absolute';
+        container.style.height = '0'
+        container.style.width = '0'
+        container.style.top = '0';
+        container.style.left = '0';
+
+        for (let i = 0; i < numBits; i++) {
+          const div = document.createElement('div');
+          container.appendChild(div);
+
+          div.style.position = 'absolute';
+          div.style.backgroundColor = `rgb(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255})`;
+          div.style.height = '5px'
+          div.style.width = '5px'
+
+          div.style.top = (window.innerHeight * Math.random()) + 'px';
+          div.style.left = (window.innerWidth * Math.random()) + 'px';
+        }
+
+        const startTime = Date.now();
+        const animationTime = 1000;
+
+        const totalDisplacementV = 300;
+
+        const animate = () => {
+          const elapsedTime = Date.now() - startTime;
+          const progress = elapsedTime / animationTime;
+
+          container.style.top = (totalDisplacementV * progress) + 'px'; 
+
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            document.body.removeChild(container);
+          }
+        };
+
+        requestAnimationFrame(animate);
+      }
+
+      function newProblem() {
+        const firstNumberEl = document.getElementById('first-number');
+        const secondNumberEl = document.getElementById('second-number');
+        const answerEl = document.getElementById('answer');
+        const feedbackEl = document.getElementById('feedback');
+
+        const firstNumber = Math.ceil(Math.random() * 20);
+        const secondNumber = Math.ceil(Math.random() * firstNumber);
+
+        firstNumberEl.innerText = firstNumber
+        secondNumberEl.innerText = secondNumber
+
+        correct = firstNumber - secondNumber;
+        answerEl.value = '';
+        feedbackEl.classList.remove('correct', 'try-again', 'fadeout');
+        feedbackEl.innerText = '';
+        answerEl.focus();
+      }
+
+      function checkAnswer() {
+        const answerEl = document.getElementById('answer');
+        const feedbackEl = document.getElementById('feedback');
+
+        feedbackEl.classList.remove('correct', 'try-again', 'fadeout');
+
+        const answer = parseFloat(answerEl.value, 10);
+
+        if (answer === correct) {
+          feedbackEl.innerText = 'Correct!';
+          feedbackEl.classList.add('correct');
+          funThing();
+        } else {
+          feedbackEl.innerText = 'Try Again';
+          feedbackEl.classList.add('try-again');
+        }
+
+        setTimeout(() => {
+          feedbackEl.classList.add('fadeout');
+        }, 3000);
+
+      }
+    </script>
+
+<style>
+
+  .container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .problem {
+    text-align:center;
+    font-size: 50px;
+    margin: 30px;
+    color: #444;
+
+    [name="answer"] {
+      width: 100px;
+      font-size: 50px;
+      padding: 4px;
+    }
+  }
+
+  #feedback {
+    text-align: center;
+    transition: opacity 1s;
+    opacity: 1;
+
+    &.correct {
+      color: #4D8C57;
+    }
+    &.try-again {
+      color: #D22B2B;
+    }
+    &.fadeout {
+      opacity: 0;
+    }
+  }
+
+  body {
+    overflow: hidden;
+  }
+</style>
+  </head>
+  <body>
+    <div class="container">
+      <form id="form" action="#">
+
+        <div id="feedback"></div>
+        <div class="problem">
+          <span id="first-number"></span>
+          <span id="operator">-</span>
+          <span id="second-number"></span>
+          <span>=</span>
+          <input id="answer" name="answer" type="number">
+        </div>
+      
+        <button>Check Answer!</button>
+        <button id="new-problem" type="button">new problem</button>
+      </form>
+
+    </div>
+
+    <script>
+      document.getElementById('new-problem').addEventListener('click', () => {
+        newProblem();
+      });
+      
+      document.getElementById('form').addEventListener('submit', e => {
+        e.preventDefault();
+        checkAnswer();
+      });
+
+      newProblem();
+    </script>
+  </body>
+</html>
