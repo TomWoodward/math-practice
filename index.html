@@ -32,13 +32,15 @@
         const startTime = Date.now();
         const animationTime = 1000;
 
-        const totalDisplacementV = 300;
+        const totalDisplacementX = 300;
+        const totalDisplacementY = 50;
 
         const animate = () => {
           const elapsedTime = Date.now() - startTime;
           const progress = elapsedTime / animationTime;
 
-          container.style.top = (totalDisplacementV * progress) + 'px'; 
+          container.style.top = (totalDisplacementX * progress) + 'px';
+          container.style.left = (totalDisplacementY * Math.sin(progress)) + 'px';
 
           if (progress < 1) {
             requestAnimationFrame(animate);
@@ -65,7 +67,7 @@
         correct = firstNumber - secondNumber;
         answerEl.value = '';
         feedbackEl.classList.remove('correct', 'try-again', 'fadeout');
-        feedbackEl.innerText = '';
+        feedbackEl.innerText = ' ';
         answerEl.focus();
       }
 
@@ -84,12 +86,11 @@
         } else {
           feedbackEl.innerText = 'Try Again';
           feedbackEl.classList.add('try-again');
+        
+          setTimeout(() => {
+            feedbackEl.classList.add('fadeout');
+          }, 3000);
         }
-
-        setTimeout(() => {
-          feedbackEl.classList.add('fadeout');
-        }, 3000);
-
       }
     </script>
 
