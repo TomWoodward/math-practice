@@ -62,6 +62,7 @@
         const settingsFormEl = document.getElementById('settings-form');
         const settings = new FormData(settingsFormEl);
 
+        alert(settings.get('subtraction.max-minuend'))
         const maxMinuend = parseFloat(settings.get('subtraction.max-minuend'), 10);
         const minMinuend = parseFloat(settings.get('subtraction.min-minuend'), 10);
         
