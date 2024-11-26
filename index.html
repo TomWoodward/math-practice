@@ -7,7 +7,7 @@
 
       function funThing() {
         const container = document.createElement('div');
-        const numBits = 50;
+        const numBits = 20;
         document.body.appendChild(container);
           
         container.style.position = 'absolute';
@@ -34,13 +34,14 @@
 
         const totalDisplacementX = 300;
         const totalDisplacementY = 20;
+        const randomSign = Math.random() < 0.5 ? -1 : 1;
 
         const animate = () => {
           const elapsedTime = Date.now() - startTime;
           const progress = elapsedTime / animationTime;
 
           container.style.top = (totalDisplacementX * progress) + 'px';
-          container.style.left = (totalDisplacementY * Math.sin(progress * Math.PI * 2)) + 'px';
+          container.style.left = (totalDisplacementY * Math.sin(progress * Math.PI * 2 * randomSign)) + 'px';
 
           if (progress < 1) {
             requestAnimationFrame(animate);
@@ -82,6 +83,8 @@
         if (answer === correct) {
           feedbackEl.innerText = 'Correct!';
           feedbackEl.classList.add('correct');
+          funThing();
+          funThing();
           funThing();
           funThing();
         } else {
