@@ -59,6 +59,8 @@
         const secondNumberEl = document.getElementById('second-number');
         const answerEl = document.getElementById('answer');
         const feedbackEl = document.getElementById('feedback');
+        const settingsFormEl = document.getElementById('settings-form');
+        const settings = new FormData(settingsFormEl);
 
         const firstNumber = Math.ceil(Math.random() * 20);
         const secondNumber = Math.ceil(Math.random() * firstNumber);
@@ -163,9 +165,9 @@
       </form>
 
       <form id="settings-form">
-        <input type="hidden" name="subtraction.numbers-up-to" value="20">
-        <input type="hidden" name="subtraction.numbers-at-least" value="8">
-        <input type="hidden" name="subtraction.minimum-difference" value="3">
+        <input type="hidden" name="subtraction.max-minuend" value="20">
+        <input type="hidden" name="subtraction.minimum-minuend" value="8">
+        <input type="hidden" name="subtraction.minimum-subtrahend" value="3">
       </form>
 
     </div>
