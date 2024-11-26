@@ -62,7 +62,10 @@
         const settingsFormEl = document.getElementById('settings-form');
         const settings = new FormData(settingsFormEl);
 
-        const firstNumber = Math.ceil(Math.random() * 20);
+        const maxMinuend = parseFloat(settings.get('subtraction.max-minuend'), 10);
+        const minMinuend = parseFloat(settings.get('subtraction.min-minuend'), 10);
+        
+        const firstNumber = minMinuend + Math.ceil(Math.random() * (maxMinuend - minMinuend));
         const secondNumber = Math.ceil(Math.random() * firstNumber);
 
         firstNumberEl.innerText = firstNumber
@@ -142,7 +145,7 @@
     }
   }
 
-  body {
+  html, body {
     overflow: hidden;
   }
 </style>
