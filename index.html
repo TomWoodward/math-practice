@@ -64,9 +64,10 @@
 
         const maxMinuend = parseFloat(settings.get('subtraction.max-minuend'), 10);
         const minMinuend = parseFloat(settings.get('subtraction.min-minuend'), 10);
+        const minSubtrahend = parseFloat(settings.get('subtraction.min-subtrahend'), 10);
         
         const firstNumber = minMinuend + Math.ceil(Math.random() * (maxMinuend - minMinuend));
-        const secondNumber = Math.ceil(Math.random() * firstNumber);
+        const secondNumber = minSubtrahend + Math.ceil(Math.random() * (firstNumber - minSubtrahend));
 
         firstNumberEl.innerText = firstNumber
         secondNumberEl.innerText = secondNumber
@@ -170,7 +171,7 @@
       <form id="settings-form">
         <input type="hidden" name="subtraction.max-minuend" value="20">
         <input type="hidden" name="subtraction.min-minuend" value="8">
-        <input type="hidden" name="subtraction.min-subtrahend" value="3">
+        <input type="hidden" name="subtraction.min-subtrahend" value="1">
       </form>
 
     </div>
