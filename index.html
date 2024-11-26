@@ -35,13 +35,14 @@
         const totalDisplacementX = 300;
         const totalDisplacementY = 20;
         const randomOffset = Math.random();
+        const magnitude = Math.random() * 2;
 
         const animate = () => {
           const elapsedTime = Date.now() - startTime;
           const progress = elapsedTime / animationTime;
 
           container.style.top = (totalDisplacementX * progress) + 'px';
-          container.style.left = (totalDisplacementY * Math.sin((progress + randomOffset) * Math.PI * 2)) + 'px';
+          container.style.left = (totalDisplacementY * Math.sin((progress + randomOffset) * Math.PI * magnitude)) + 'px';
 
           if (progress < 1) {
             requestAnimationFrame(animate);
