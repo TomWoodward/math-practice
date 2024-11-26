@@ -40,7 +40,7 @@
           const progress = elapsedTime / animationTime;
 
           container.style.top = (totalDisplacementX * progress) + 'px';
-          container.style.left = (totalDisplacementY * Math.sin(progress)) + 'px';
+          container.style.left = (totalDisplacementY * Math.sin(progress * Math.PI * 2)) + 'px';
 
           if (progress < 1) {
             requestAnimationFrame(animate);
